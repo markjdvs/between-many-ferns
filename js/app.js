@@ -95,6 +95,21 @@ $(() => {
     matches = [];
   }
 
+  function repositionBoard (i, vertIndex) {
+    for (let vertIndex = 0; vertIndex < n; vertIndex++) {
+      if ($('li').eq(i).hasClass('empty') === true) {
+        const classToAdd = $('li').eq(i-(vertIndex*n)).attr('class');
+        $('li').eq(i).removeClass().addClass(classToAdd);
+        $('li').eq(i-(vertIndex*n)).removeClass().addClass('empty');
+      }
+    }
+  }
+// reposition board plan:
+//
+// feed columnIndexRev into the right fn and use it as the other integer
+// manipulate for the ifs and elses below that
+
+
   function boardHasStreaks () {
     for(let i = 0; i<n; i++) {
       verticalStreaker(i);
@@ -102,14 +117,16 @@ $(() => {
     for (let i = 0; i<nSq; i++) {
       horizontalStreaker(i);
     }
-    console.log(matches);
 
     removeStreaks(matches);
+
+    for (let i = nSq-1; i >= 0; i--) {
+      repositionBoard(i);
+    }
   }
-
-
 
   genBoard();
   boardHasStreaks();
+
 
 });
