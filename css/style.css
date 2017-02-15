@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+img {
+  size: 100%;
+}
+
+main {
+  height: 500px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+
+ul {
+ height: 500px;
+ width: 500px;
+ padding:0;
+ float: left;
+ margin: 5% auto;
+}
+
+li {
+  height: 100px;
+  width: 100px;
+  float: left;
+  list-style: none;
+  background-size: cover;
+  background-position: center;
+  border: 1px ridge #000;
+  border-style:
+}
+
+.red {
+  background-image: url('../images/red.jpg');
+}
+
+.yellow {
+  background-image: url('../images/yellow.jpg');
+}
+
+.blue {
+  background-image: url('../images/blue.jpg');
+}
+
+.green {
+  background-image: url('../images/green.jpg');
+}
+
+.empty {
+}
