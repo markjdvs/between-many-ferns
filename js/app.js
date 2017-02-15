@@ -182,11 +182,11 @@ $(() => {
 // end of horizontals
 // verticals
 // first vertical
-    for (let i = (nSq-n); i < nSq; i=i+n) {
-      if (i < (nSq-1)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+1).attr('class')) {
+    for (let i = 0; i < nSq; i=i+n) {
+      if (i < (nSq-n)) {
+        if ($('li').eq(i).attr('class') === $('li').eq(i+n).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+1));
+          tempArray.push($('li').eq(i), $('li').eq(i+n));
         } else {
           if (streak >= 2) {
             matches = matches.concat(tempArray);
@@ -210,11 +210,11 @@ $(() => {
     }
     console.log('1st vertical streaks', matches);
 // second vertical
-    for (let i = (nSq-n); i < nSq; i=i+n) {
-      if (i < (nSq-1)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+1).attr('class')) {
+    for (let i = (n-4); i < nSq; i=i+n) {
+      if (i < (nSq-n)) {
+        if ($('li').eq(i).attr('class') === $('li').eq(i+n).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+1));
+          tempArray.push($('li').eq(i), $('li').eq(i+n));
         } else {
           if (streak >= 2) {
             matches = matches.concat(tempArray);
@@ -238,11 +238,11 @@ $(() => {
     }
     console.log('2nd vertical streaks', matches);
 // third vertical
-    for (let i = (nSq-n); i < nSq; i=i+n) {
-      if (i < (nSq-1)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+1).attr('class')) {
+    for (let i = (n-3); i < nSq; i=i+n) {
+      if (i < (nSq-n)) {
+        if ($('li').eq(i).attr('class') === $('li').eq(i+n).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+1));
+          tempArray.push($('li').eq(i), $('li').eq(i+n));
         } else {
           if (streak >= 2) {
             matches = matches.concat(tempArray);
@@ -266,11 +266,11 @@ $(() => {
     }
     console.log('3rd vertical streaks', matches);
 // fourth vertical
-    for (let i = (nSq-n); i < nSq; i=i+n) {
-      if (i < (nSq-1)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+1).attr('class')) {
+    for (let i = (n-2); i < nSq; i=i+n) {
+      if (i < (nSq-n)) {
+        if ($('li').eq(i).attr('class') === $('li').eq(i+n).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+1));
+          tempArray.push($('li').eq(i), $('li').eq(i+n));
         } else {
           if (streak >= 2) {
             matches = matches.concat(tempArray);
@@ -294,11 +294,11 @@ $(() => {
     }
     console.log('4th vertical streaks', matches);
 // last vertical
-    for (let i = (nSq-n); i < nSq; i=i+n) {
-      if (i < (nSq-1)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+1).attr('class')) {
+    for (let i = (n-1); i < nSq; i=i+n) {
+      if (i < (nSq-n)) {
+        if ($('li').eq(i).attr('class') === $('li').eq(i+n).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+1));
+          tempArray.push($('li').eq(i), $('li').eq(i+n));
         } else {
           if (streak >= 2) {
             matches = matches.concat(tempArray);
@@ -321,8 +321,8 @@ $(() => {
       }
     }
     console.log('last vertical streaks', matches);
-
   }
+
 
 
   genBoard();
