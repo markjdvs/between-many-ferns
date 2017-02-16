@@ -19,7 +19,7 @@ $(() => {
   function tilePicGenerator (i) {
     const randPicNum = Math.floor(Math.random()*tilePics.length);
     const randColor = `${tilePics[randPicNum]}`;
-    $('li').eq(i).attr('class', randColor);
+    $('li').eq(i).css({ opacity: 0 }).attr('class', randColor).animate({ opacity: 1 }, i*50);
   }
 
   function genBoard () {
@@ -124,6 +124,7 @@ $(() => {
   }
 
   function repositionBoard() {
+    m = 0;
     for (let i = 0; i<n; i++) {
       for (let i = nSq-1; i >= 0; i--) {
         repositionTile(i);

@@ -25,7 +25,7 @@ ul {
   height: 700px;
   width: 700px;
   padding: 0;
-  left: 250px;
+  left: 375px;
   position: absolute;
 }
 
@@ -49,8 +49,8 @@ ul {
 div.display {
   height: 200px;
   width: 150px;
-  top: 280px;
-  right: 50px;
+  top: 250px;
+  right: 100px;
   position: absolute;
   text-align: center;
   padding: 10px;
@@ -58,7 +58,6 @@ div.display {
   background-color: #fff;
   position: absolute;
   text-align: center;
-  line-height:
 }
 
 div.display p {
