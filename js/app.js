@@ -7,12 +7,14 @@ let count = 0;
 let $choiceArray = [];
 let score = 0;
 
-const n = 10;
+const n = 7;
 const nSq = Math.pow(n, 2);
 
 $(() => {
   const $board = $('ul');
-  const tilePics = ['yellow', 'blue', 'green', 'red'];
+  const tilePics = ['zack', 'cera', 'steve', 'fern', 'bieber', 'barack'];
+  const $score = $('.score');
+  const $shuffle = $('button');
 
   function tilePicGenerator (i) {
     const randPicNum = Math.floor(Math.random()*tilePics.length);
@@ -25,6 +27,18 @@ $(() => {
     for (let i = 0; i<nSq; i++) {
       $board.append(tile);
       tilePicGenerator(i);
+    }
+  }
+
+  function reShuffle () {
+    for (let i = 0; i<nSq; i++) {
+      tilePicGenerator(i);
+    }
+    boardHasStreaks();
+
+    while($matches.length>0) {
+      removeRepositionUpdate();
+      boardHasStreaks();
     }
   }
 
@@ -91,10 +105,12 @@ $(() => {
   }
 
   function removeStreaks () {
+    console.log($matches.length);
+    $.unique($matches);
+    console.log($matches.length);
     for (let i = 0; i<$matches.length; i++) {
       $matches[i].removeClass().addClass('empty');
     }
-    console.log('removeStreaks', $matches.length);
   }
 
   function repositionTile (i) {
@@ -113,7 +129,6 @@ $(() => {
         repositionTile(i);
       }
     }
-    console.log('repositionBoard', $matches.length);
   }
 
   function updateBoard() {
@@ -123,7 +138,6 @@ $(() => {
         tilePicGenerator(i);
       }
     }
-    console.log('updateBoard', $matches.length);
   }
 
   function removeRepositionUpdate() {
@@ -132,14 +146,12 @@ $(() => {
     updateBoard();
   }
 
+
   function matchAdjTiles(e) {
     ++count;
     if (count%2 !== 0) {
-      console.log('firstEvent');
       $choiceArray.push($(e.target));
-
     } else {
-      console.log('secondEvent');
       $choiceArray.push($(e.target));
       canSwitch();
     }
@@ -153,7 +165,6 @@ $(() => {
     for (let i = 0; i<n; i++) {
       horizontalStreaker(i);
     }
-    console.log('boardHasStreaks', $matches.length);
   }
 
 
@@ -162,9 +173,20 @@ $(() => {
     count = 0;
   }
 
-  function switchTiles() {
-    console.log('tiles are adjacent');
+  function addToScore() {
+    const $currentScore = $score.html();
+    const $addScore = $matches.length;
+    switch (true) {
+      case !$currentScore:
+        $score.html($addScore);
+        break;
+      default:
+        $score.html(parseInt($currentScore)+parseInt($addScore));
+        break;
+    }
+  }
 
+  function switchTiles() {
     const $firstClass = $choiceArray[0].attr('class');
     const $secondClass = $choiceArray[1].attr('class');
     $choiceArray[0].attr('class', $secondClass);
@@ -173,24 +195,21 @@ $(() => {
     if ($matches.length>0) {
       boardHasStreaks();
       while($matches.length>0) {
+        addToScore();
         removeRepositionUpdate();
         boardHasStreaks();
       }
+      refreshChoices();
     } else {
       $choiceArray[0].attr('class', $firstClass);
       $choiceArray[1].attr('class', $secondClass);
-      console.log('switch did not cause streak');
+      refreshChoices();
     }
-    refreshChoices();
-
   }
 
   function canSwitch() {
-    console.log($choiceArray);
     const i = $choiceArray[0].index();
-    console.log(i);
     const j = $choiceArray[1].index();
-    console.log(j);
     if (i === j) {
       refreshChoices();
     } else if (i<n) {
@@ -239,6 +258,8 @@ $(() => {
       }
     } else if (j === (i-1) || j === (i+1) || j === (i-n) || j === (i+n)){
       switchTiles();
+    } else {
+      refreshChoices();
     }
   }
 
@@ -252,6 +273,6 @@ $(() => {
   }
 
   $board.on('click', 'li', matchAdjTiles);
-
+  $shuffle.on('click', reShuffle);
 
 });

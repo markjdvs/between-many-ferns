@@ -1,23 +1,68 @@
 * {
   box-sizing: border-box;
+  font-family: 'Indie Flower', cursive;
 }
 
 img {
   size: 100%;
 }
 
+header {
+  padding: 5px;
+  height: 50px;
+  font-size: 35px;
+  text-align: center;
+}
+
 main {
-  height: 1000px;
-  width: 1000px;
+  height: 100%;
   margin: 0 auto;
+  background-color: #fff;
+  position: relative;
 }
 
 ul {
- height: 1000px;
- width: 1000px;
- padding:0;
- float: left;
- margin: 5% auto;
+  height: 700px;
+  width: 700px;
+  padding: 0;
+  left: 250px;
+  position: absolute;
+}
+
+.shuffle {
+  font-size: 30px;
+  font-family: 'Indie Flower', cursive;
+  background-color: #fff;
+  height: 100px;
+  width: 200px;
+  top: 280px;
+  left: 20px;
+  position: absolute;
+  text-align: center;
+  border: 2px dashed #666666;
+  border-radius: 50%;
+  line-height: 100px;
+  text-align: center;
+  outline: none;
+}
+
+div.display {
+  height: 200px;
+  width: 150px;
+  top: 280px;
+  right: 50px;
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Indie Flower', cursive;
+  background-color: #fff;
+  position: absolute;
+  text-align: center;
+  line-height:
+}
+
+div.display p {
+  font-size: 40px;
 }
 
 li {
@@ -27,16 +72,17 @@ li {
   list-style: none;
   background-size: cover;
   background-position: center;
-  border: 1px ridge #000;
-  border-style:
+  border: 2px ridge #666666;
+  background-color: #98FB98;
+  border-radius: 50%;
 }
 
 li:hover {
   cursor: pointer;
-   animation-duration: 400ms;
-   animation-name: blink;
-   animation-iteration-count: infinite;
-   animation-direction: alternate;
+  animation-duration: 400ms;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 @keyframes blink {
@@ -44,24 +90,33 @@ li:hover {
      opacity: 0.8;
   }
   to {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
-.red {
-  background-image: url('../images/red.png');
+
+.zack {
+  background-image: url('../images/zack.png');
 }
 
-.yellow {
-  background-image: url('../images/yellow.png');
+.cera {
+  background-image: url('../images/cera.png');
 }
 
-.blue {
-  background-image: url('../images/blue.png');
+.steve {
+  background-image: url('../images/steve.png');
 }
 
-.green {
-  background-image: url('../images/green.png');
+.fern {
+  background-image: url('../images/fern.png');
+}
+
+.bieber {
+  background-image: url('../images/bieber.png');
+}
+
+.barack {
+  background-image: url('../images/barack.png')
 }
 
 .empty {
