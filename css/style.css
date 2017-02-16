@@ -32,19 +32,19 @@ li {
 }
 
 .red {
-  background-image: url('../images/red.jpg');
+  background-image: url('../images/red.png');
 }
 
 .yellow {
-  background-image: url('../images/yellow.jpg');
+  background-image: url('../images/yellow.png');
 }
 
 .blue {
-  background-image: url('../images/blue.jpg');
+  background-image: url('../images/blue.png');
 }
 
 .green {
-  background-image: url('../images/green.jpg');
+  background-image: url('../images/green.png');
 }
 
 .empty {
