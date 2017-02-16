@@ -5,8 +5,9 @@ let tempArray = [];
 let $matches = [];
 let count = 0;
 let $choiceArray = [];
+let score = 0;
 
-const n = 5;
+const n = 10;
 const nSq = Math.pow(n, 2);
 
 $(() => {
@@ -28,7 +29,6 @@ $(() => {
   }
 
   function horizontalStreaker (rowIndex) {
-    console.log('horizontalStreaker');
     tempArray = [];
 
     for (let i = rowIndex*n; i < (rowIndex+1)*n; i++) {
@@ -60,7 +60,6 @@ $(() => {
   }
 
   function verticalStreaker(columnIndex) {
-    console.log('verticalStreaker');
     tempArray = [];
 
     for (let i = columnIndex; i < nSq; i=i+n) {
@@ -128,11 +127,9 @@ $(() => {
   }
 
   function removeRepositionUpdate() {
-
     removeStreaks();
     repositionBoard();
     updateBoard();
-
   }
 
   function matchAdjTiles(e) {
@@ -145,7 +142,6 @@ $(() => {
       console.log('secondEvent');
       $choiceArray.push($(e.target));
       canSwitch();
-
     }
   }
 
@@ -195,8 +191,9 @@ $(() => {
     console.log(i);
     const j = $choiceArray[1].index();
     console.log(j);
-
-    if (i<n) {
+    if (i === j) {
+      refreshChoices();
+    } else if (i<n) {
       if (i === 0 && (j === (i+1) || j === n)) {
         switchTiles();
       }
