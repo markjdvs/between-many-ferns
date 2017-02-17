@@ -5,7 +5,6 @@ let tempArray = [];
 let $matches = [];
 let count = 0;
 let $choiceArray = [];
-let score = 0;
 
 const n = 7;
 const nSq = Math.pow(n, 2);
@@ -124,7 +123,6 @@ $(() => {
   }
 
   function repositionBoard() {
-    m = 0;
     for (let i = 0; i<n; i++) {
       for (let i = nSq-1; i >= 0; i--) {
         repositionTile(i);
