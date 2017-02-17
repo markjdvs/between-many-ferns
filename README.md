@@ -4,11 +4,13 @@
 
 *A modern twist on a timeless classic.*
 
-https://secure-dawn-20517.herokuapp.com/ "Play it here!"
+##### [Play it here!](https://secure-dawn-20517.herokuapp.com/)
+
+![alt text](./images/project-game.png "Logo Title Text 1")
 
 ##Rules
 
-1 player game.
+1 Player Game:
 
 1. Choose 2 tiles to switch to match chains of similar tiles.
 2. Tiles may only switch to adjacent tiles and only in horizontal or vertical directions.
@@ -25,7 +27,6 @@ The game is now ready to be played. Event listeners over the board look out for 
 ##Build
 
 * jQuery, CSS & HTML5 were used to make the game.
-* 
 
 ##Problems & Challenges
 
