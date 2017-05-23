@@ -5,7 +5,7 @@ let tempArray = [];
 let $matches = [];
 let count = 0;
 let $choiceArray = [];
-let n = 7;
+let n = 6;
 let nSq = Math.pow(n, 2);
 
 $(() => {
@@ -24,10 +24,12 @@ $(() => {
 
   function genBoard () {
     const tile = '<li></li>';
+    $board.empty();
     for (let i = 0; i<nSq; i++) {
       $board.append(tile);
       tilePicGenerator(i);
     }
+    $board.find('li').css({'width': `calc(100% / ${n})`, 'height': `calc(100% / ${n})`});
   }
 
   function reShuffle () {
@@ -267,11 +269,18 @@ $(() => {
     }
   }
 
-  // function boardSizeHasChanged() {
+  // function gameBegin(e) {
   //   n = $(e.target).val();
   //   nSq = Math.pow(n, 2);
   //   $('ul').empty();
   //   genBoard();
+  //   boardHasStreaks();
+  //   while($matches.length>0) {
+  //     removeRepositionUpdate();
+  //     boardHasStreaks();
+  //   }
+  //   $board.on('click', 'li', matchAdjTiles);
+  //   $shuffle.on('click', reShuffle);
   // }
 
   genBoard();
@@ -283,8 +292,9 @@ $(() => {
     boardHasStreaks();
   }
 
-  // $('input[type=range]').on('change', boardSizeHasChanged);
+  // $('input[type=range]').on('change', gameBegin);
   $board.on('click', 'li', matchAdjTiles);
   $shuffle.on('click', reShuffle);
+
 
 });
