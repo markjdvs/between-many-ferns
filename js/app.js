@@ -267,12 +267,12 @@ $(() => {
     }
   }
 
-  function boardSizeHasChanged() {
-    n = $(e.target).val();
-    nSq = Math.pow(n, 2);
-    $('ul').empty();
-    genBoard();
-  }
+  // function boardSizeHasChanged() {
+  //   n = $(e.target).val();
+  //   nSq = Math.pow(n, 2);
+  //   $('ul').empty();
+  //   genBoard();
+  // }
 
   genBoard();
 
@@ -283,7 +283,7 @@ $(() => {
     boardHasStreaks();
   }
 
-  $('input[type=range]').on('change', boardSizeHasChanged);
+  // $('input[type=range]').on('change', boardSizeHasChanged);
   $board.on('click', 'li', matchAdjTiles);
   $shuffle.on('click', reShuffle);
 
