@@ -5,11 +5,11 @@ let tempArray = [];
 let $matches = [];
 let count = 0;
 let $choiceArray = [];
-
-const n = 7;
-const nSq = Math.pow(n, 2);
+let n = 7;
+let nSq = Math.pow(n, 2);
 
 $(() => {
+
   const $board = $('ul');
   const tilePics = ['zack', 'cera', 'steve', 'fern', 'bieber', 'barack'];
   const $score = $('.score');
@@ -18,7 +18,8 @@ $(() => {
   function tilePicGenerator (i) {
     const randPicNum = Math.floor(Math.random()*tilePics.length);
     const randColor = `${tilePics[randPicNum]}`;
-    $('li').eq(i).css({ opacity: 0 }).attr('class', randColor).animate({ opacity: 1 }, i*50);
+    const $li = $('li');
+    $li.eq(i).css({ opacity: 0 }).attr('class', randColor).animate({ opacity: 1 }, i*50);
   }
 
   function genBoard () {
@@ -46,9 +47,10 @@ $(() => {
 
     for (let i = rowIndex*n; i < (rowIndex+1)*n; i++) {
       if (i < (((rowIndex+1)*n)-1)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+1).attr('class')) {
+        const $li = $('li');
+        if ($li.eq(i).attr('class') === $li.eq(i+1).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+1));
+          tempArray.push($li.eq(i), $li.eq(i+1));
         } else {
           if (streak >= 2) {
             $matches = $matches.concat(tempArray);
@@ -77,9 +79,10 @@ $(() => {
 
     for (let i = columnIndex; i < nSq; i=i+n) {
       if (i < (nSq-n)) {
-        if ($('li').eq(i).attr('class') === $('li').eq(i+n).attr('class')) {
+        const $li = $('li');
+        if ($li.eq(i).attr('class') === $li.eq(i+n).attr('class')) {
           streak++;
-          tempArray.push($('li').eq(i), $('li').eq(i+n));
+          tempArray.push($li.eq(i), $li.eq(i+n));
         } else {
           if (streak >= 2) {
             $matches = $matches.concat(tempArray);
@@ -113,11 +116,12 @@ $(() => {
   }
 
   function repositionTile (i) {
+    const $li = $('li');
     if (i>=n) {
-      if (($('li').eq(i).hasClass('empty') === true) && ($('li').eq(i-n).hasClass('empty') === false)) {
-        const classToAdd = $('li').eq(i-n).attr('class');
-        $('li').eq(i).removeClass().addClass(classToAdd);
-        $('li').eq(i-n).removeClass().addClass('empty');
+      if (($li.eq(i).hasClass('empty') === true) && ($li.eq(i-n).hasClass('empty') === false)) {
+        const classToAdd = $li.eq(i-n).attr('class');
+        $li.eq(i).removeClass().addClass(classToAdd);
+        $li.eq(i-n).removeClass().addClass('empty');
       }
     }
   }
@@ -131,9 +135,10 @@ $(() => {
   }
 
   function updateBoard() {
+    const $li = $('li');
     for (let i = nSq-1; i >= 0; i--) {
       // for (let j = i; j >= 0; j=i-n) {
-      if ($('li').eq(i).attr('class') === 'empty') {
+      if ($li.eq(i).attr('class') === 'empty') {
         tilePicGenerator(i);
       }
     }
@@ -262,6 +267,13 @@ $(() => {
     }
   }
 
+  function boardSizeHasChanged() {
+    n = $(e.target).val();
+    nSq = Math.pow(n, 2);
+    $('ul').empty();
+    genBoard();
+  }
+
   genBoard();
 
   boardHasStreaks();
@@ -271,6 +283,7 @@ $(() => {
     boardHasStreaks();
   }
 
+  $('input[type=range]').on('change', boardSizeHasChanged);
   $board.on('click', 'li', matchAdjTiles);
   $shuffle.on('click', reShuffle);
 
