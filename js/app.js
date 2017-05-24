@@ -108,7 +108,7 @@ $(() => {
   }
 
   function removeStreaks () {
-    $.unique($matches);
+    console.log($matches);
     for (let i = 0; i<$matches.length; i++) {
       $matches[i].removeClass().addClass('empty');
     }
@@ -136,7 +136,6 @@ $(() => {
   function updateBoard() {
     const $li = $('li');
     for (let i = nSq-1; i >= 0; i--) {
-      // for (let j = i; j >= 0; j=i-n) {
       if ($li.eq(i).hasClass('empty')) {
         tilePicGenerator(i);
       }
@@ -151,7 +150,6 @@ $(() => {
 
   function matchAdjTiles(e) {
     ++count;
-    console.log('count', count);
     if (count%2 !== 0) {
       $choiceArray.push($(e.target));
       $choiceArray[0].addClass('animated jello');
@@ -172,30 +170,29 @@ $(() => {
     }
   }
 
-
   function refreshChoices() {
     $choiceArray = [];
     count = 0;
   }
 
   function addToScore() {
-    const $currentScore = $score.html();
-    const $addScore = $matches.length;
+    const currentScore = $score.html();
+    const addScore = $matches.length;
     switch (true) {
-      case !$currentScore:
-        $score.html($addScore);
+      case !currentScore:
+        $score.html(addScore);
         break;
       default:
-        $score.html(parseInt($currentScore)+parseInt($addScore));
+        $score.html(parseInt(currentScore)+parseInt(addScore));
         break;
     }
   }
 
   function switchTiles() {
-    const $firstClass = $choiceArray[0].attr('class');
-    const $secondClass = $choiceArray[1].attr('class');
-    $choiceArray[0].attr('class', $secondClass);
-    $choiceArray[1].attr('class', $firstClass);
+    const firstClass = $choiceArray[0].attr('class');
+    const secondClass = $choiceArray[1].attr('class');
+    $choiceArray[0].attr('class', secondClass);
+    $choiceArray[1].attr('class', firstClass);
     boardHasStreaks();
     if ($matches.length>0) {
       boardHasStreaks();
@@ -206,14 +203,14 @@ $(() => {
       }
       refreshChoices();
     } else {
-      $choiceArray[0].attr('class', $firstClass);
-      $choiceArray[1].attr('class', $secondClass);
+      $choiceArray[0].attr('class', firstClass);
+      $choiceArray[1].attr('class', secondClass);
       refreshChoices();
     }
   }
 
   function canSwitch() {
-    console.log('$choiceArray', $choiceArray);
+
     const i = $choiceArray[0].index();
     const j = $choiceArray[1].index();
     if (i === j) {
@@ -269,12 +266,18 @@ $(() => {
     }
   }
 
-  function boardSizeHasChanged(e) {
+
+  function initializeGame(e) {
     n = $(e.target).val();
     nSq = Math.pow(n, 2);
     $('label').html(n);
     $('ul').empty();
     genBoard();
+    boardHasStreaks();
+    while($matches.length>0) {
+      removeRepositionUpdate();
+      boardHasStreaks();
+    }
   }
 
   genBoard();
@@ -284,7 +287,7 @@ $(() => {
     boardHasStreaks();
   }
 
-  $('input[type=range]').on('change', boardSizeHasChanged);
+  $('input[type=range]').on('change', initializeGame);
   $board.on('click', 'li', matchAdjTiles);
   $shuffle.on('click', reShuffle);
 
