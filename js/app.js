@@ -149,7 +149,6 @@ $(() => {
     updateBoard();
   }
 
-
   function matchAdjTiles(e) {
     ++count;
     console.log('count', count);

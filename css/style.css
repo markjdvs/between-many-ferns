@@ -75,10 +75,6 @@ li {
 li:hover {
   cursor: pointer;
   animation: pulse 1.5s infinite;
-  /*animation-duration: 1000ms;
-  animation-name: pulse;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;*/
 }
 
 @keyframes pulse {
@@ -86,7 +82,7 @@ li:hover {
      transform: scale(1);
   }
   50% {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 }
 
