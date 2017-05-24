@@ -5,7 +5,7 @@ let tempArray = [];
 let $matches = [];
 let count = 0;
 let $choiceArray = [];
-let n = 6;
+let n = 5;
 let nSq = Math.pow(n, 2);
 
 $(() => {
@@ -24,7 +24,6 @@ $(() => {
 
   function genBoard () {
     const tile = '<li></li>';
-    $board.empty();
     for (let i = 0; i<nSq; i++) {
       $board.append(tile);
       tilePicGenerator(i);
@@ -109,9 +108,7 @@ $(() => {
   }
 
   function removeStreaks () {
-    console.log($matches.length);
     $.unique($matches);
-    console.log($matches.length);
     for (let i = 0; i<$matches.length; i++) {
       $matches[i].removeClass().addClass('empty');
     }
@@ -120,7 +117,7 @@ $(() => {
   function repositionTile (i) {
     const $li = $('li');
     if (i>=n) {
-      if (($li.eq(i).hasClass('empty') === true) && ($li.eq(i-n).hasClass('empty') === false)) {
+      if (($li.eq(i).hasClass('empty')) && (!$li.eq(i-n).hasClass('empty'))) {
         const classToAdd = $li.eq(i-n).attr('class');
         $li.eq(i).removeClass().addClass(classToAdd);
         $li.eq(i-n).removeClass().addClass('empty');
@@ -140,7 +137,7 @@ $(() => {
     const $li = $('li');
     for (let i = nSq-1; i >= 0; i--) {
       // for (let j = i; j >= 0; j=i-n) {
-      if ($li.eq(i).attr('class') === 'empty') {
+      if ($li.eq(i).hasClass('empty')) {
         tilePicGenerator(i);
       }
     }
@@ -155,10 +152,13 @@ $(() => {
 
   function matchAdjTiles(e) {
     ++count;
+    console.log('count', count);
     if (count%2 !== 0) {
       $choiceArray.push($(e.target));
+      $choiceArray[0].addClass('chosen');
     } else {
       $choiceArray.push($(e.target));
+      $choiceArray[0].removeClass('chosen');
       canSwitch();
     }
   }
@@ -214,6 +214,7 @@ $(() => {
   }
 
   function canSwitch() {
+    console.log('$choiceArray', $choiceArray);
     const i = $choiceArray[0].index();
     const j = $choiceArray[1].index();
     if (i === j) {
@@ -269,32 +270,23 @@ $(() => {
     }
   }
 
-  // function gameBegin(e) {
-  //   n = $(e.target).val();
-  //   nSq = Math.pow(n, 2);
-  //   $('ul').empty();
-  //   genBoard();
-  //   boardHasStreaks();
-  //   while($matches.length>0) {
-  //     removeRepositionUpdate();
-  //     boardHasStreaks();
-  //   }
-  //   $board.on('click', 'li', matchAdjTiles);
-  //   $shuffle.on('click', reShuffle);
-  // }
+  function boardSizeHasChanged(e) {
+    n = $(e.target).val();
+    nSq = Math.pow(n, 2);
+    $('label').html(n);
+    $('ul').empty();
+    genBoard();
+  }
 
   genBoard();
-
   boardHasStreaks();
-
   while($matches.length>0) {
     removeRepositionUpdate();
     boardHasStreaks();
   }
 
-  // $('input[type=range]').on('change', gameBegin);
+  $('input[type=range]').on('change', boardSizeHasChanged);
   $board.on('click', 'li', matchAdjTiles);
   $shuffle.on('click', reShuffle);
-
 
 });

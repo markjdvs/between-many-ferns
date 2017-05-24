@@ -4,9 +4,14 @@
     <meta charset="utf-8">
     <title>Between Many Ferns</title>
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
     <script src="js/app.js" charset="utf-8"></script>
   </head>
   <body>
@@ -18,7 +23,8 @@
         <ul></ul>
       </div>
         <div class="display">
-          <!-- <input type="range" min="5" max="10"> -->
+          <label for="sizeOfBoard">7</label>
+          <input disabled type="range" id="sizeOfBoard" min="5" max="10">
           <button class="shuffle">RESHUFFLE.</button>
           <h1>Score</h1>
           <p class="score">0</p>

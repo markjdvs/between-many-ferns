@@ -29,6 +29,10 @@ ul {
   overflow: hidden;
 }
 
+.chosen {
+  border: 2px dashed white;
+}
+
 .shuffle {
   font-size: 30px;
   font-family: 'Indie Flower', cursive;
@@ -49,8 +53,9 @@ div.display {
   background-color: #fff;
 }
 
-div.display h1, div.display p, div.display button {
+div.display h1, div.display p, div.display button, div.display input {
   display: inline-block;
+  margin: 0 20px;
 }
 
 div.display p {
@@ -58,8 +63,6 @@ div.display p {
 }
 
 li {
-  /*height: 100px;*/
-  /*width: 100px;*/
   float: left;
   list-style: none;
   background-size: cover;
@@ -111,5 +114,6 @@ li:hover {
   background-image: url('../images/barack.png')
 }
 
-.empty {
-}
+/*.empty {
+  background-image: url()
+}*/
