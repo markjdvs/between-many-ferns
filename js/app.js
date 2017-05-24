@@ -108,7 +108,6 @@ $(() => {
   }
 
   function removeStreaks () {
-    console.log($matches);
     for (let i = 0; i<$matches.length; i++) {
       $matches[i].removeClass().addClass('empty');
     }
@@ -193,6 +192,7 @@ $(() => {
     const secondClass = $choiceArray[1].attr('class');
     $choiceArray[0].attr('class', secondClass);
     $choiceArray[1].attr('class', firstClass);
+
     boardHasStreaks();
     if ($matches.length>0) {
       boardHasStreaks();
