@@ -155,10 +155,10 @@ $(() => {
     console.log('count', count);
     if (count%2 !== 0) {
       $choiceArray.push($(e.target));
-      $choiceArray[0].addClass('chosen');
+      $choiceArray[0].addClass('animated jello');
     } else {
       $choiceArray.push($(e.target));
-      $choiceArray[0].removeClass('chosen');
+      $choiceArray[0].removeClass('animated jello');
       canSwitch();
     }
   }

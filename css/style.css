@@ -29,9 +29,9 @@ ul {
   overflow: hidden;
 }
 
-.chosen {
-  border: 2px dashed white;
-}
+/*.chosen {
+  border: 3px dashed white;
+}*/
 
 .shuffle {
   font-size: 30px;
@@ -74,18 +74,19 @@ li {
 
 li:hover {
   cursor: pointer;
-  animation-duration: 400ms;
-  animation-name: blink;
+  animation: pulse 1.5s infinite;
+  /*animation-duration: 1000ms;
+  animation-name: pulse;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: alternate;*/
 }
 
-@keyframes blink {
-  from {
-     opacity: 0.8;
+@keyframes pulse {
+  0%, 100% {
+     transform: scale(1);
   }
-  to {
-    opacity: 0.6;
+  50% {
+    transform: scale(0.9);
   }
 }
 
