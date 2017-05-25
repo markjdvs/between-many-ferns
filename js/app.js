@@ -7,6 +7,8 @@ let count = 0;
 let $choiceArray = [];
 let n = 6;
 let nSq = Math.pow(n, 2);
+let firstWrongChoice = null;
+let secondWrongChoice = null;
 
 $(() => {
 
@@ -184,9 +186,15 @@ $(() => {
 
   function refreshChoices() {
     console.log('running refreshChoices');
-    // for(let i=0; i<$choiceArray.length; i++) {
-    //   $choiceArray[i].addClass('wrong');
-    // }
+    firstWrongChoice = $choiceArray[0];
+    secondWrongChoice = $choiceArray[1];
+    for(let i=0; i<$choiceArray.length; i++) {
+      $choiceArray[i].addClass('wrong');
+    }
+    setTimeout(() => {
+      firstWrongChoice.removeClass('wrong');
+      secondWrongChoice.removeClass('wrong');
+    }, 1000);
     $choiceArray = [];
     count = 0;
   }
