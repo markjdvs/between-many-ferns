@@ -16,20 +16,26 @@
     <script src="js/app.js" charset="utf-8"></script>
   </head>
   <body>
-    <header>
-      Between Many Ferns
-    </header>
     <main>
-      <div>
+      <div class="board">
         <ul></ul>
       </div>
-        <div class="display">
+      <div class="display">
+        <div class="aboutSection">
+          <button class="about">About</button>
+        </div>
+        <!-- <div class="sizeSection">
           <label for="sizeOfBoard">6</label>
           <input disabled type="range" id="sizeOfBoard" value="6" min="5" max="10">
-          <button class="shuffle">RESHUFFLE.</button>
+        </div> -->
+        <div class="shuffleSection">
+          <button class="shuffle">Reshuffle</button>
+        </div>
+        <div class="scoreSection">
           <h1>Score</h1>
           <p class="score">0</p>
         </div>
+      </div>
     </main>
   </body>
 </html>

@@ -1,5 +1,3 @@
-console.log('JS Loaded & Proud');
-
 let streak = 0;
 let tempArray = [];
 let $matches = [];
@@ -15,10 +13,28 @@ $(() => {
   const $board = $('ul');
   const tilePics = ['zack', 'cera', 'steve', 'fern', 'bieber', 'barack'];
   const $score = $('.score');
-  const $shuffle = $('button');
+  const $shuffle = $('button.shuffle');
+  const $about = $('button.about');
+
+  function displayAbout() {
+    console.log('about function');
+    $('div.display').children().hide();
+    $('div.display').append(`
+      <div class="aboutContent">
+        <p>Gain points by matching chains of at least three tiles or more. You can only switch adjacent tiles to make these chains. Get as many points as you can! Zen it out.</p>
+        <button class="ready">Ready?</button>
+      </div>
+      `
+    ).hide().fadeIn();
+    $('.aboutContent').on('click', 'button.ready', removeAbout);
+  }
+
+  function removeAbout() {
+    $('div.aboutContent').remove();
+    $('div.display').children().fadeIn();
+  }
 
   function tilePicGenerator (i) {
-    console.log('running tilePicGenerator');
     const randPicNum = Math.floor(Math.random()*tilePics.length);
     const randColor = `${tilePics[randPicNum]}`;
     const $li = $('li');
@@ -26,7 +42,6 @@ $(() => {
   }
 
   function genBoard () {
-    console.log('running genBoard');
     const tile = '<li></li>';
     for (let i = 0; i<nSq; i++) {
       $board.append(tile);
@@ -36,7 +51,6 @@ $(() => {
   }
 
   function reShuffle () {
-    console.log('running reShuffle');
     for (let i = 0; i<nSq; i++) {
       tilePicGenerator(i);
     }
@@ -49,7 +63,6 @@ $(() => {
   }
 
   function horizontalStreaker (rowIndex) {
-    console.log('running horizontalStreaker');
     tempArray = [];
 
     for (let i = rowIndex*n; i < (rowIndex+1)*n; i++) {
@@ -82,7 +95,6 @@ $(() => {
   }
 
   function verticalStreaker(columnIndex) {
-    console.log('running verticalStreaker');
     tempArray = [];
 
     for (let i = columnIndex; i < nSq; i=i+n) {
@@ -115,14 +127,12 @@ $(() => {
   }
 
   function removeStreaks () {
-    console.log('running removeStreaks');
     for (let i = 0; i<$matches.length; i++) {
       $matches[i].removeClass().addClass('empty');
     }
   }
 
   function repositionTile (i) {
-    console.log('running repositionTile');
     const $li = $('li');
     if (i>=n) {
       if (($li.eq(i).hasClass('empty')) && (!$li.eq(i-n).hasClass('empty'))) {
@@ -134,7 +144,6 @@ $(() => {
   }
 
   function repositionBoard() {
-    console.log('running repositionBoard');
     for (let i = 0; i<n; i++) {
       for (let i = nSq-1; i >= 0; i--) {
         repositionTile(i);
@@ -143,7 +152,6 @@ $(() => {
   }
 
   function updateBoard() {
-    console.log('running updateBoard');
     const $li = $('li');
     for (let i = nSq-1; i >= 0; i--) {
       if ($li.eq(i).hasClass('empty')) {
@@ -153,14 +161,12 @@ $(() => {
   }
 
   function removeRepositionUpdate() {
-    console.log('running removeRepositionUpdate');
     removeStreaks();
     repositionBoard();
     updateBoard();
   }
 
   function matchAdjTiles(e) {
-    console.log('running matchAdjTiles');
     ++count;
     if (count%2 !== 0) {
       $choiceArray.push($(e.target));
@@ -173,7 +179,6 @@ $(() => {
   }
 
   function boardHasStreaks() {
-    console.log('running boardHasStreaks');
     $matches = [];
     for(let i = 0; i<n; i++) {
       verticalStreaker(i);
@@ -181,11 +186,9 @@ $(() => {
     for (let i = 0; i<n; i++) {
       horizontalStreaker(i);
     }
-    console.log(`$matches length is ${$matches.length} when the boardHasStreaks has finished`);
   }
 
   function refreshChoices() {
-    console.log('running refreshChoices');
     firstWrongChoice = $choiceArray[0];
     secondWrongChoice = $choiceArray[1];
     for(let i=0; i<$choiceArray.length; i++) {
@@ -200,7 +203,6 @@ $(() => {
   }
 
   function addToScore() {
-    console.log('running addToScore');
     const currentScore = $score.html();
     const addScore = $matches.length;
     switch (true) {
@@ -214,13 +216,11 @@ $(() => {
   }
 
   function switchTiles() {
-    console.log('running switchTiles');
     const firstClass = $choiceArray[0].attr('class');
     const secondClass = $choiceArray[1].attr('class');
     $choiceArray[0].attr('class', secondClass);
     $choiceArray[1].attr('class', firstClass);
 
-    console.log(`length of $matches is ${$matches.length}`);
 
     boardHasStreaks();
 
@@ -240,12 +240,9 @@ $(() => {
   }
 
   function canSwitch() {
-    console.log('running canSwitch');
     const i = $choiceArray[0].index();
     const j = $choiceArray[1].index();
 
-    console.log('i', i);
-    console.log('j', j);
 
     if (i === j) {
       refreshChoices();
@@ -301,7 +298,6 @@ $(() => {
   }
 
   function initializeGame() {
-    console.log('running initializeGame');
     // n = $(e.target).val();
     // nSq = Math.pow(n, 2);
     // $('label').html(n);
@@ -316,7 +312,7 @@ $(() => {
 
   initializeGame();
   // $('input[type=range]').on('change', initializeGame);
+  $about.on('click', displayAbout);
   $board.on('click', 'li', matchAdjTiles);
   $shuffle.on('click', reShuffle);
-
 });
